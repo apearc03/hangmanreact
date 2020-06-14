@@ -43,7 +43,7 @@ class App extends React.Component {
           >
             Learn React
         </a>
-        <Num></Num>
+        <Num/>
         </header>
       </div>
     );
