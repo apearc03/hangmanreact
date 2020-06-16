@@ -33,7 +33,7 @@ class CanvasComponent extends React.Component {
   updateCanvas() {
     const ctx = this.refs.canvas.getContext('2d');
     ctx.rotate(90 * Math.PI / 180);
-    ctx.fillRect(100, - 100, 80, 20);
+    ctx.fillRect(0, - 100, 200, 20);
   }
   render() {
     return (
@@ -47,18 +47,13 @@ class CanvasLine extends React.Component {
     this.updateCanvas();
   }
   updateCanvas() {
-    const ctx = this.refs.myCanvas.getContext('2d');
-    const x1 = 150;
-    const y1 = 100;
-    const r = 200;
-    const theta = 0.1;
-    ctx.moveTo(x1, y1);
-    ctx.lineTo(x1 + r * Math.cos(theta), y1 + r * Math.sin(theta));
-    ctx.stroke();
+    const ctx = this.refs.canvas.getContext('2d');
+    ctx.rotate(0 * Math.PI / 180);
+    ctx.fillRect(50, 0, 80, 20);
   }
   render() {
     return (
-      <canvas ref="myCanvas" width={400} height={400} />
+      <canvas ref="canvas" width={200} height={20} />
     )
   }
 }
@@ -82,6 +77,7 @@ class App extends React.Component {
         </a>
           <Num />
           <CanvasComponent />
+
           <CanvasLine/>
         </header>
       </div>
