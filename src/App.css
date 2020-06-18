@@ -40,3 +40,7 @@
 .numButton{
   color: yellow;
 }
+
+.fLeft{
+  float: left;
+}
