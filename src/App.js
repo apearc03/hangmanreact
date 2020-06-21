@@ -32,11 +32,11 @@ class TopLine extends React.Component {
   updateCanvas() {
     const ctx = this.refs.canvas.getContext('2d');
     ctx.rotate(0 * Math.PI / 180);
-    ctx.fillRect(140, 0, 160, 20);
+    ctx.fillRect(0, 0, 200, 20);
   }
   render() {
     return (
-      <canvas ref="canvas" width={300} height={20} />
+      <canvas ref="canvas" width={200} height={20} />
     )
   }
 }
@@ -48,11 +48,11 @@ class MiddleLine extends React.Component {
   updateCanvas() {
     const ctx = this.refs.canvas.getContext('2d');
     ctx.rotate(90 * Math.PI / 180);
-    ctx.fillRect(0, - 60, 200, 20);
+    ctx.fillRect(0, -20, 200, 20);
   }
   render() {
     return (
-      <canvas ref="canvas" width={200} height={200} />
+      <canvas ref="canvas" width={20} height={200} />
     )
   }
 }
@@ -80,7 +80,7 @@ class Rope extends React.Component {
   updateCanvas() {
     const ctx = this.refs.canvas.getContext('2d');
     ctx.rotate(90 * Math.PI / 180);
-    ctx.fillRect(0, -150, 30, 20);
+    ctx.fillRect(0, -160, 30, 20);
   }
   render() {
     return (
@@ -96,7 +96,7 @@ class Head extends React.Component {
   updateCanvas() {
     const ctx = this.refs.canvas.getContext('2d');
     ctx.beginPath();
-    ctx.arc(140, 25, 25, 0, 2 * Math.PI);
+    ctx.arc(150, 25, 25, 0, 2 * Math.PI);
     ctx.stroke();
     ctx.fill();
   }
@@ -114,11 +114,11 @@ class Body extends React.Component {
   updateCanvas() {
     const ctx = this.refs.canvas.getContext('2d');
     ctx.rotate(90 * Math.PI / 180);
-    ctx.fillRect(0, -50, 30, 20);
+    ctx.fillRect(0, -20, 30, 20);
   }
   render() {
     return (
-      <canvas ref="canvas" width={60} height={70} />
+      <canvas ref="canvas" width={20} height={35} />
     )
   }
 }
@@ -130,11 +130,11 @@ class LeftArm extends React.Component {
   updateCanvas() {
     const ctx = this.refs.canvas.getContext('2d');
     ctx.rotate(300 * Math.PI / 180);
-    ctx.fillRect(- 5, 40, 30, 20);
+    ctx.fillRect(31, 110, 30, 15);
   }
   render() {
     return (
-      <canvas ref="canvas" width={70} height={70} />
+      <canvas ref="canvas" width={140} height={35} />
     )
   }
 }
@@ -145,12 +145,12 @@ class RightArm extends React.Component {
   }
   updateCanvas() {
     const ctx = this.refs.canvas.getContext('2d');
-    ctx.rotate(50 * Math.PI / 180);
-    ctx.fillRect(20, - 20, 30, 20);
+    ctx.rotate(55 * Math.PI / 180);
+    ctx.fillRect(10, -10, 30, 15);
   }
   render() {
     return (
-      <canvas ref="canvas" width={70} height={70} />
+      <canvas ref="canvas" width={50} height={35} />
     )
   }
 }
@@ -161,12 +161,12 @@ class LeftLeg extends React.Component {
   }
   updateCanvas() {
     const ctx = this.refs.canvas.getContext('2d');
-    ctx.rotate(90 * Math.PI / 180);
-    ctx.fillRect(0, -20, 30, 20);
+    ctx.rotate(120 * Math.PI / 180);
+    ctx.fillRect(-70, -130, 50, 10);
   }
   render() {
     return (
-      <canvas ref="canvas" width={50} height={30} />
+      <canvas ref="canvas" width={150} height={70} />
     )
   }
 }
@@ -177,12 +177,12 @@ class RightLeg extends React.Component {
   }
   updateCanvas() {
     const ctx = this.refs.canvas.getContext('2d');
-    ctx.rotate(90 * Math.PI / 180);
-    ctx.fillRect(0, -20, 30, 20);
+    ctx.rotate(60 * Math.PI / 180);
+    ctx.fillRect(5, -10, 50, 10);
   }
   render() {
     return (
-      <canvas ref="canvas" width={50} height={30} />
+      <canvas ref="canvas" width={50} height={70} />
     )
   }
 }
@@ -193,29 +193,26 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">
           <Num />
-          <TopLine />
+            <TopLine />
           <div>
-            <div class="fLeft">
               <MiddleLine />
-            </div>
 
-            <div class="fLeft">
+            <div class="hangmanPart">
               <div><Rope /></div>
               <div><Head /></div>
-              <div>
-                <div class="fLeft"><LeftArm /></div>
-                <div class="fLeft"><Body /></div>
-                <div class="fLeft"><RightArm /></div>
+              <div >
+                <div class="hangmanPart"><LeftArm /></div>
+                <div class="hangmanPart"><Body /></div>
+                <div class="hangmanPart"><RightArm /></div>
               </div>
               <div>
-                <div class="fLeft"><LeftLeg /></div>
-                <div class="fLeft"><RightLeg /></div>
+                <div class="hangmanPart"><LeftLeg /></div>
+                <div class="hangmanPart"><RightLeg /></div>
               </div>
             </div>
 
           </div>
-
-          <BottomLine />
+            <BottomLine />
         </header>
       </div>
     );

@@ -1,7 +1,5 @@
-.App {
-  text-align: center;
-}
 
+/* 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -35,12 +33,20 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+
+.App {
+  padding-left: 50px;
+  white-space: nowrap;
 }
 
 .numButton{
   color: yellow;
 }
 
-.fLeft{
-  float: left;
+.hangmanPart{
+  display: inline-block;
 }
+
+
