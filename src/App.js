@@ -80,7 +80,7 @@ class Rope extends React.Component {
   updateCanvas() {
     const ctx = this.refs.canvas.getContext('2d');
     ctx.rotate(90 * Math.PI / 180);
-    ctx.fillRect(0, -160, 30, 20);
+    ctx.fillRect(0, -156, 30, 12);
   }
   render() {
     return (
