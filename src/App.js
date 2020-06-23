@@ -25,164 +25,36 @@ class Num extends React.Component {
   }
 }
 
-class TopLine extends React.Component {
+class Line extends React.Component {
   componentDidMount() {
     this.updateCanvas();
   }
   updateCanvas() {
     const ctx = this.refs.canvas.getContext('2d');
-    ctx.rotate(0 * Math.PI / 180);
-    ctx.fillRect(0, 0, 200, 20);
+    ctx.rotate(this.props.angle * Math.PI / 180);
+    ctx.fillRect(this.props.x, this.props.y, this.props.width, this.props.height);
   }
   render() {
     return (
-      <canvas ref="canvas" width={200} height={20} />
+      <canvas ref="canvas" width={this.props.canvasWidth} height={this.props.canvasHeight} />
     )
   }
 }
 
-class MiddleLine extends React.Component {
-  componentDidMount() {
-    this.updateCanvas();
-  }
-  updateCanvas() {
-    const ctx = this.refs.canvas.getContext('2d');
-    ctx.rotate(90 * Math.PI / 180);
-    ctx.fillRect(0, -20, 200, 20);
-  }
-  render() {
-    return (
-      <canvas ref="canvas" width={20} height={200} />
-    )
-  }
-}
-
-class BottomLine extends React.Component {
-  componentDidMount() {
-    this.updateCanvas();
-  }
-  updateCanvas() {
-    const ctx = this.refs.canvas.getContext('2d');
-    ctx.rotate(0 * Math.PI / 180);
-    ctx.fillRect(0, 0, 100, 20);
-  }
-  render() {
-    return (
-      <canvas ref="canvas" width={100} height={20} />
-    )
-  }
-}
-
-class Rope extends React.Component {
-  componentDidMount() {
-    this.updateCanvas();
-  }
-  updateCanvas() {
-    const ctx = this.refs.canvas.getContext('2d');
-    ctx.rotate(90 * Math.PI / 180);
-    ctx.fillRect(0, -156, 30, 12);
-  }
-  render() {
-    return (
-      <canvas ref="canvas" width={200} height={30} />
-    )
-  }
-}
-
-class Head extends React.Component {
+class Circle extends React.Component {
   componentDidMount() {
     this.updateCanvas();
   }
   updateCanvas() {
     const ctx = this.refs.canvas.getContext('2d');
     ctx.beginPath();
-    ctx.arc(150, 25, 25, 0, 2 * Math.PI);
+    ctx.arc(this.props.x, this.props.y, this.props.radius, this.props.startAngle, 2 * Math.PI);
     ctx.stroke();
     ctx.fill();
   }
   render() {
     return (
-      <canvas ref="canvas" width={200} height={50} />
-    )
-  }
-}
-
-class Body extends React.Component {
-  componentDidMount() {
-    this.updateCanvas();
-  }
-  updateCanvas() {
-    const ctx = this.refs.canvas.getContext('2d');
-    ctx.rotate(90 * Math.PI / 180);
-    ctx.fillRect(0, -20, 30, 20);
-  }
-  render() {
-    return (
-      <canvas ref="canvas" width={20} height={35} />
-    )
-  }
-}
-
-class LeftArm extends React.Component {
-  componentDidMount() {
-    this.updateCanvas();
-  }
-  updateCanvas() {
-    const ctx = this.refs.canvas.getContext('2d');
-    ctx.rotate(300 * Math.PI / 180);
-    ctx.fillRect(31, 110, 30, 15);
-  }
-  render() {
-    return (
-      <canvas ref="canvas" width={140} height={35} />
-    )
-  }
-}
-
-class RightArm extends React.Component {
-  componentDidMount() {
-    this.updateCanvas();
-  }
-  updateCanvas() {
-    const ctx = this.refs.canvas.getContext('2d');
-    ctx.rotate(55 * Math.PI / 180);
-    ctx.fillRect(10, -10, 30, 15);
-  }
-  render() {
-    return (
-      <canvas ref="canvas" width={50} height={35} />
-    )
-  }
-}
-
-class LeftLeg extends React.Component {
-  componentDidMount() {
-    this.updateCanvas();
-  }
-  updateCanvas() {
-    const ctx = this.refs.canvas.getContext('2d');
-    ctx.rotate(120 * Math.PI / 180);
-    ctx.fillRect(-70, -130, 50, 10);
-  }
-  render() {
-    return (
-      <canvas ref="canvas" width={150} height={70} />
-    )
-  }
-}
-
-class RightLeg extends React.Component {
-  componentDidMount() {
-    this.updateCanvas();
-  }
-  updateCanvas() {
-    const ctx = this.refs.canvas.getContext('2d');
-    ctx.rotate(60 * Math.PI / 180);
-    ctx.fillRect(5, -10, 50, 10);
-  }
-  render() {
-    return (
-      <canvas ref="canvas" width={50} height={70} />
+      <canvas ref="canvas" width={this.props.canvasWidth} height={this.props.canvasHeight} />
     )
   }
 }
@@ -193,26 +65,26 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">
           <Num />
-            <TopLine />
+          <Line angle = "0" x = "0" y = "0" width = "200" height = "20" canvasWidth="200" canvasHeight="20"/>
           <div>
-              <MiddleLine />
+            <Line angle = "90" x = "0" y = "-20" width = "200" height = "20" canvasWidth="20" canvasHeight="200"/>
 
             <div class="hangmanPart">
-              <div><Rope /></div>
-              <div><Head /></div>
+              <div><Line angle = "90" x = "0" y = "-156" width = "30" height = "12" canvasWidth="200" canvasHeight="30"/></div>
+              <div><Circle x = "150" y = "25" radius= "22" startAngle = "0" canvasWidth = "200" canvasHeight = "50"/></div>
               <div >
-                <div class="hangmanPart"><LeftArm /></div>
-                <div class="hangmanPart"><Body /></div>
-                <div class="hangmanPart"><RightArm /></div>
+                <div class="hangmanPart"><Line angle = "300" x = "31" y = "110" width = "30" height = "15" canvasWidth="140" canvasHeight="35"/></div>
+                <div class="hangmanPart"><Line angle = "90" x = "0" y = "-20" width = "30" height = "20" canvasWidth="20" canvasHeight="35"/></div>
+                <div class="hangmanPart"><Line angle = "55" x = "10" y = "-10" width = "30" height = "15" canvasWidth="50" canvasHeight="35"/></div>
               </div>
               <div>
-                <div class="hangmanPart"><LeftLeg /></div>
-                <div class="hangmanPart"><RightLeg /></div>
+                <div class="hangmanPart"><Line angle = "120" x = "-70" y = "-130" width = "50" height = "10" canvasWidth="150" canvasHeight="70"/></div>
+                <div class="hangmanPart"><Line angle = "60" x = "5" y = "-10" width = "50" height = "10" canvasWidth="50" canvasHeight="70"/></div>
               </div>
             </div>
 
           </div>
-            <BottomLine />
+          <Line angle = "0" x = "0" y = "0" width = "100" height = "20" canvasWidth="100" canvasHeight="20"/>
         </header>
       </div>
     );
