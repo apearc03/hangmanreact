@@ -67,8 +67,31 @@ class Letter extends React.Component {
   }
 }
 
-class App extends React.Component {
+
+class GuessLetter extends React.Component {
   render() {
+    return (
+      <div class="displayLetter">{this.props.letter}</div>
+    )
+  }
+}
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.word = "alphabet"; //assign to random word
+  }
+
+  render() {
+
+    const guessLetters = [];
+    const lettersToPick = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]; 
+    const letterInstances = [];
+
+    for(let value of lettersToPick){
+      letterInstances.push(<Letter letter={value} />);
+    }
+
     return (
       <div>
         <div className="hangman">
@@ -97,32 +120,7 @@ class App extends React.Component {
           <Line angle="0" x="0" y="0" width="100" height="20" canvasWidth="100" canvasHeight="20" />
         </div>
         <div>
-          <Letter letter="A" />
-          <Letter letter="B" />
-          <Letter letter="C" />
-          <Letter letter="D" />
-          <Letter letter="E" />
-          <Letter letter="F" />
-          <Letter letter="G" />
-          <Letter letter="H" />
-          <Letter letter="I" />
-          <Letter letter="J" />
-          <Letter letter="K" />
-          <Letter letter="L" />
-          <Letter letter="M" />
-          <Letter letter="N" />
-          <Letter letter="O" />
-          <Letter letter="P" />
-          <Letter letter="Q" />
-          <Letter letter="R" />
-          <Letter letter="S" />
-          <Letter letter="T" />
-          <Letter letter="U" />
-          <Letter letter="V" />
-          <Letter letter="W" />
-          <Letter letter="X" />
-          <Letter letter="Y" />
-          <Letter letter="Z" />
+          {letterInstances}
         </div>
       </div>
     );
