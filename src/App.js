@@ -71,7 +71,10 @@ class Letter extends React.Component {
 class GuessLetter extends React.Component {
   render() {
     return (
-      <div class="displayLetter">{this.props.letter}</div>
+      <div class="guessLetter">
+        <div>{this.props.letter}</div>
+        <Line angle="0" x="0" y="0" width="70" height="5" canvasWidth="70" canvasHeight="10"></Line>
+      </div>
     )
   }
 }
@@ -85,11 +88,15 @@ class App extends React.Component {
   render() {
 
     const guessLetters = [];
-    const lettersToPick = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]; 
+    const lettersToPick = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
     const letterInstances = [];
 
-    for(let value of lettersToPick){
+    for (let value of lettersToPick) {
       letterInstances.push(<Letter letter={value} />);
+    }
+
+    for(let value of this.word){
+      guessLetters.push(<GuessLetter letter={value}/>);
     }
 
     return (
@@ -118,6 +125,9 @@ class App extends React.Component {
 
           </div>
           <Line angle="0" x="0" y="0" width="100" height="20" canvasWidth="100" canvasHeight="20" />
+        </div>
+        <div id="guesses">
+          {guessLetters}
         </div>
         <div>
           {letterInstances}
