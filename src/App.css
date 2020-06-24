@@ -36,12 +36,6 @@
 } */
 
 
-.hangman {
-  padding-left: 50px;
-  white-space: nowrap;
-  padding-bottom: 50px;
-}
-
 .numButton{
   color: yellow;
 }
@@ -68,7 +62,20 @@
 }
 
 #guesses{
+  padding-top: 20px;
   padding-bottom: 50px;
 }
 
+#letters{
+  padding-bottom: 50px;
+}
+
+#hangman {
+  white-space: nowrap;
+}
+
+#app{
+  padding-left: 20px;
+  padding-right:20px;
+}
 

@@ -1,30 +1,6 @@
 import React from 'react';
 import './App.css';
 
-class Num extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 0,
-    };
-  }
-
-  render() {
-    return (
-      <div>
-        <button className="numButton"
-          onClick={() => this.setState({ value: this.state.value + 1 })}
-        >
-          increment
-      </button>
-        <p>
-          {this.state.value}
-        </p>
-      </div>
-    )
-  }
-}
-
 class Line extends React.Component {
   componentDidMount() {
     this.updateCanvas();
@@ -100,11 +76,14 @@ class App extends React.Component {
     }
 
     return (
-      <div>
-        <div className="hangman">
-          <header className="App-header">
-          </header>
-          <Num />
+      <div id = "app">
+        <div id="guesses">
+          {guessLetters}
+        </div>
+        <div id="letters">
+          {letterInstances}
+        </div>
+        <div id="hangman">
           <Line angle="0" x="0" y="0" width="200" height="20" canvasWidth="200" canvasHeight="20" />
           <div>
             <Line angle="90" x="0" y="-20" width="200" height="20" canvasWidth="20" canvasHeight="200" />
@@ -125,12 +104,6 @@ class App extends React.Component {
 
           </div>
           <Line angle="0" x="0" y="0" width="100" height="20" canvasWidth="100" canvasHeight="20" />
-        </div>
-        <div id="guesses">
-          {guessLetters}
-        </div>
-        <div>
-          {letterInstances}
         </div>
       </div>
     );
