@@ -59,33 +59,71 @@ class Circle extends React.Component {
   }
 }
 
+class Letter extends React.Component {
+  render() {
+    return (
+      <div class="displayLetter">{this.props.letter}</div>
+    )
+  }
+}
+
 class App extends React.Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
+      <div>
+        <div className="hangman">
+          <header className="App-header">
+          </header>
           <Num />
-          <Line angle = "0" x = "0" y = "0" width = "200" height = "20" canvasWidth="200" canvasHeight="20"/>
+          <Line angle="0" x="0" y="0" width="200" height="20" canvasWidth="200" canvasHeight="20" />
           <div>
-            <Line angle = "90" x = "0" y = "-20" width = "200" height = "20" canvasWidth="20" canvasHeight="200"/>
+            <Line angle="90" x="0" y="-20" width="200" height="20" canvasWidth="20" canvasHeight="200" />
 
             <div class="hangmanPart">
-              <div><Line angle = "90" x = "0" y = "-156" width = "30" height = "12" canvasWidth="200" canvasHeight="30"/></div>
-              <div><Circle x = "150" y = "25" radius= "22" startAngle = "0" canvasWidth = "200" canvasHeight = "50"/></div>
+              <div><Line angle="90" x="0" y="-156" width="30" height="12" canvasWidth="200" canvasHeight="30" /></div>
+              <div><Circle x="150" y="25" radius="22" startAngle="0" canvasWidth="200" canvasHeight="50" /></div>
               <div >
-                <div class="hangmanPart"><Line angle = "300" x = "31" y = "110" width = "30" height = "15" canvasWidth="140" canvasHeight="35"/></div>
-                <div class="hangmanPart"><Line angle = "90" x = "0" y = "-20" width = "30" height = "20" canvasWidth="20" canvasHeight="35"/></div>
-                <div class="hangmanPart"><Line angle = "55" x = "10" y = "-10" width = "30" height = "15" canvasWidth="50" canvasHeight="35"/></div>
+                <div class="hangmanPart"><Line angle="300" x="31" y="110" width="30" height="15" canvasWidth="140" canvasHeight="35" /></div>
+                <div class="hangmanPart"><Line angle="90" x="0" y="-20" width="30" height="20" canvasWidth="20" canvasHeight="35" /></div>
+                <div class="hangmanPart"><Line angle="55" x="10" y="-10" width="30" height="15" canvasWidth="50" canvasHeight="35" /></div>
               </div>
               <div>
-                <div class="hangmanPart"><Line angle = "120" x = "-70" y = "-130" width = "50" height = "10" canvasWidth="150" canvasHeight="70"/></div>
-                <div class="hangmanPart"><Line angle = "60" x = "5" y = "-10" width = "50" height = "10" canvasWidth="50" canvasHeight="70"/></div>
+                <div class="hangmanPart"><Line angle="120" x="-70" y="-130" width="50" height="10" canvasWidth="150" canvasHeight="70" /></div>
+                <div class="hangmanPart"><Line angle="60" x="5" y="-10" width="50" height="10" canvasWidth="50" canvasHeight="70" /></div>
               </div>
             </div>
 
           </div>
-          <Line angle = "0" x = "0" y = "0" width = "100" height = "20" canvasWidth="100" canvasHeight="20"/>
-        </header>
+          <Line angle="0" x="0" y="0" width="100" height="20" canvasWidth="100" canvasHeight="20" />
+        </div>
+        <div>
+          <Letter letter="A" />
+          <Letter letter="B" />
+          <Letter letter="C" />
+          <Letter letter="D" />
+          <Letter letter="E" />
+          <Letter letter="F" />
+          <Letter letter="G" />
+          <Letter letter="H" />
+          <Letter letter="I" />
+          <Letter letter="J" />
+          <Letter letter="K" />
+          <Letter letter="L" />
+          <Letter letter="M" />
+          <Letter letter="N" />
+          <Letter letter="O" />
+          <Letter letter="P" />
+          <Letter letter="Q" />
+          <Letter letter="R" />
+          <Letter letter="S" />
+          <Letter letter="T" />
+          <Letter letter="U" />
+          <Letter letter="V" />
+          <Letter letter="W" />
+          <Letter letter="X" />
+          <Letter letter="Y" />
+          <Letter letter="Z" />
+        </div>
       </div>
     );
   }
