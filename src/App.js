@@ -41,29 +41,46 @@ class Letter extends React.Component {
       <div class="displayLetter">{this.props.letter}</div>
     )
   }
+
+  letterGuessed(){
+    
+  }
 }
 
 
-class GuessLetter extends React.Component {
+class WordLetter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.shouldShowLetter = false;
+  }
+
   render() {
     return (
-      <div class="guessLetter">
-        <div>{this.props.letter}</div>
+      <div class="wordLetter">
+        <div class="slot">{this.shouldShowLetter ? this.props.letter : ""}</div>
         <Line angle="0" x="0" y="0" width="70" height="5" canvasWidth="70" canvasHeight="10"></Line>
       </div>
     )
+  }
+
+  showLetter(){
+    this.shouldShowLetter = true;
   }
 }
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.word = "alphabet"; //assign to random word
+    this.word = this.pickWord(); //assign to random word, preferably all caps.
+  }
+
+  pickWord(){
+    return "alphabet";
   }
 
   render() {
 
-    const guessLetters = [];
+    const wordLetters = [];
     const lettersToPick = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
     const letterInstances = [];
 
@@ -72,13 +89,13 @@ class App extends React.Component {
     }
 
     for(let value of this.word){
-      guessLetters.push(<GuessLetter letter={value}/>);
+      wordLetters.push(<WordLetter letter={value}/>);
     }
 
     return (
       <div id = "app">
-        <div id="guesses">
-          {guessLetters}
+        <div id="word">
+          {wordLetters}
         </div>
         <div id="letters">
           {letterInstances}
