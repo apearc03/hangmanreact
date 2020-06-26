@@ -74,6 +74,8 @@
 
 #hangman {
   white-space: nowrap;
+  width: auto;
+  height: 252px;
 }
 
 #app{

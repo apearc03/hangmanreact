@@ -68,6 +68,23 @@ class WordLetter extends React.Component {
   }
 }
 
+class HangManPart extends React.Component {
+  constructor(props) {
+    super(props);
+    this.renderPart = true;
+  }
+
+  testFunction(){ //doesn't work? need instance of Hangman or different way of accessing?
+    this.renderPart = true;
+  }
+
+  render() {
+    return (
+      this.renderPart ? this.props.part : null
+    )
+  }
+}
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -93,17 +110,18 @@ class App extends React.Component {
       wordLetters.push(<WordLetter letter={value}/>);
     }
 
-    hangManParts.push(<Line angle="0" x="0" y="0" width="100" height="20" canvasWidth="100" canvasHeight="20" />);
-    hangManParts.push(<Line angle="90" x="0" y="-20" width="200" height="20" canvasWidth="20" canvasHeight="200" />);
-    hangManParts.push(<Line angle="0" x="0" y="0" width="200" height="20" canvasWidth="200" canvasHeight="20" />);
-    hangManParts.push(<Line angle="90" x="0" y="-156" width="30" height="12" canvasWidth="200" canvasHeight="30" />);
-    hangManParts.push(<Circle x="150" y="25" radius="22" startAngle="0" canvasWidth="200" canvasHeight="50" />);
-    hangManParts.push(<Line angle="90" x="0" y="-20" width="30" height="20" canvasWidth="20" canvasHeight="35" />);
-    hangManParts.push(<Line angle="300" x="31" y="110" width="30" height="15" canvasWidth="140" canvasHeight="35" />);
-    hangManParts.push(<Line angle="55" x="10" y="-10" width="30" height="15" canvasWidth="50" canvasHeight="35" />);
-    hangManParts.push(<Line angle="120" x="-70" y="-130" width="50" height="10" canvasWidth="150" canvasHeight="70" />);
-    hangManParts.push(<Line angle="60" x="5" y="-10" width="50" height="10" canvasWidth="50" canvasHeight="70" />);
+    hangManParts.push(<HangManPart part={<Line angle="0" x="0" y="0" width="100" height="20" canvasWidth="100" canvasHeight="20" />}/>);
+    hangManParts.push(<HangManPart part={<Line angle="90" x="0" y="-20" width="200" height="20" canvasWidth="20" canvasHeight="200" />}/>);
+    hangManParts.push(<HangManPart part={<Line angle="0" x="0" y="0" width="200" height="20" canvasWidth="200" canvasHeight="20" />}/>);
+    hangManParts.push(<HangManPart part={<Line angle="90" x="0" y="-156" width="30" height="12" canvasWidth="200" canvasHeight="30" />}/>);
+    hangManParts.push(<HangManPart part={<Circle x="150" y="25" radius="22" startAngle="0" canvasWidth="200" canvasHeight="50" />}/>);
+    hangManParts.push(<HangManPart part={<Line angle="90" x="0" y="-20" width="30" height="20" canvasWidth="20" canvasHeight="35" />}/>);
+    hangManParts.push(<HangManPart part={<Line angle="300" x="31" y="110" width="30" height="15" canvasWidth="140" canvasHeight="35" />}/>);
+    hangManParts.push(<HangManPart part={<Line angle="55" x="10" y="-10" width="30" height="15" canvasWidth="50" canvasHeight="35" />}/>);
+    hangManParts.push(<HangManPart part={<Line angle="120" x="-70" y="-130" width="50" height="10" canvasWidth="150" canvasHeight="70" />}/>);
+    hangManParts.push(<HangManPart part={<Line angle="60" x="5" y="-10" width="50" height="10" canvasWidth="50" canvasHeight="70" />}/>);
 
+    
     return (
       <div id = "app">
         <div id="word">
