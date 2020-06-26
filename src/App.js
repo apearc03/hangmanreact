@@ -38,7 +38,7 @@ class Circle extends React.Component {
 class Letter extends React.Component {
   render() {
     return (
-      <div class="displayLetter">{this.props.letter}</div>
+      <div className="displayLetter">{this.props.letter}</div>
     )
   }
 
@@ -56,8 +56,8 @@ class WordLetter extends React.Component {
 
   render() {
     return (
-      <div class="wordLetter">
-        <div class="slot">{this.shouldShowLetter ? this.props.letter : null}</div>
+      <div className="wordL">
+        <div className="slot">{this.shouldShowLetter ? this.props.letter : null}</div>
         <Line angle="0" x="0" y="0" width="70" height="5" canvasWidth="70" canvasHeight="10"></Line>
       </div>
     )
@@ -97,12 +97,13 @@ class App extends React.Component {
     const letterInstances = [];
     const hangManParts = [];
 
-    for (let value of lettersToPick) {
-      letterInstances.push(<Letter letter={value} />);
+    for (var i = 0; i < lettersToPick.length; i++ ){
+      letterInstances.push(<Letter key = {i} letter={lettersToPick[i]} />);
     }
 
-    for (let value of this.word) {
-      wordLetters.push(<WordLetter letter={value} />);
+    for (var j = 0; j < this.word.length; j++) {
+      wordLetters.push(<WordLetter key={j} letter={this.word.charAt(j)} />);
+      //Add code here to do the translation
     }
 
     hangManParts.push(<HangManPart part={<Line angle="0" x="0" y="0" width="100" height="20" canvasWidth="100" canvasHeight="20" />} />);
@@ -129,17 +130,17 @@ class App extends React.Component {
           {hangManParts[2]}
           <div>
             {hangManParts[1]}
-            <div class="hangmanPart">
+            <div className="hangmanPart">
               <div>{hangManParts[3]}</div>
               <div>{hangManParts[4]}</div>
               <div >
-                <div class="hangmanPart">{hangManParts[5]}</div>
-                <div class="hangmanPart">{hangManParts[6]}</div>
-                <div class="hangmanPart">{hangManParts[7]}</div>
+                <div className="hangmanPart">{hangManParts[5]}</div>
+                <div className="hangmanPart">{hangManParts[6]}</div>
+                <div className="hangmanPart">{hangManParts[7]}</div>
               </div>
               <div>
-                <div class="hangmanPart">{hangManParts[8]}</div>
-                <div class="hangmanPart">{hangManParts[9]}</div>
+                <div className="hangmanPart">{hangManParts[8]}</div>
+                <div className="hangmanPart">{hangManParts[9]}</div>
               </div>
             </div>
 
