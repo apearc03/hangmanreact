@@ -89,9 +89,8 @@ class App extends React.Component {
       this.wordLetters.push(<WordLetter key={j} letter={this.word.charAt(j)} />);
     }
 
-
-    this.hangManParts.push(<Line angle="90" x="0" y="-20" width="200" height="20" canvasWidth="20" canvasHeight="200" />);
     this.hangManParts.push(<Line angle="0" x="0" y="0" width="100" height="20" canvasWidth="100" canvasHeight="20" />);
+    this.hangManParts.push(<Line angle="90" x="0" y="-20" width="200" height="20" canvasWidth="20" canvasHeight="200" />);
     this.hangManParts.push(<Line angle="0" x="0" y="0" width="200" height="20" canvasWidth="200" canvasHeight="20" />);
     this.hangManParts.push(<Line angle="90" x="0" y="-156" width="30" height="12" canvasWidth="200" canvasHeight="30" />);
     this.hangManParts.push(<Circle x="150" y="25" radius="22" startAngle="0" canvasWidth="200" canvasHeight="50" />);
@@ -106,8 +105,7 @@ class App extends React.Component {
     return "alphabet";
   }
 
-  testFunc(){
-    //this.setState({renderOne: this.hangManParts[this.state.partIncrementer]});
+  showHangManPart(){
     this.partStates[this.state.partIncrementer] = this.hangManParts[this.state.partIncrementer];
     this.setState({partIncrementer: this.state.partIncrementer + 1})
   }
@@ -122,27 +120,27 @@ class App extends React.Component {
           {this.letterInstances}
         </div>
         <div id="hangman">
-          {this.partStates[2]}
+          <div id = "part3">{this.partStates[2]}</div>
           <div>
-          {this.partStates[0]}
+            {this.partStates[1]}
             <div className="hangmanPart">
-              <div>{this.partStates[3]}</div>
-              <div>{this.partStates[4]}</div>
+              <div id = "part4">{this.partStates[3]}</div>
+              <div id = "part5">{this.partStates[4]}</div>
               <div >
-                <div className="hangmanPart">{this.partStates[5]}</div>
-                <div className="hangmanPart">{this.partStates[6]}</div>
-                <div className="hangmanPart">{this.partStates[7]}</div>
+                <div id = "part6" className="hangmanPart">{this.partStates[5]}</div>
+                <div id = "part7" className="hangmanPart">{this.partStates[6]}</div>
+                <div id = "part8" className="hangmanPart">{this.partStates[7]}</div>
               </div>
               <div>
-                <div className="hangmanPart">{this.partStates[8]}</div>
-                <div className="hangmanPart">{this.partStates[9]}</div>
+                <div id = "part9" className="hangmanPart">{this.partStates[8]}</div>
+                <div id = "part10" className="hangmanPart">{this.partStates[9]}</div>
               </div>
             </div>
 
           </div>
-          {this.partStates[1]}
+          <div id = "part2">{this.partStates[0]}</div>
         </div>
-        <button onClick={() => this.testFunc()}>
+        <button onClick={() => this.showHangManPart()}>
           onclick
         </button>
       </div>
