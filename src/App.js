@@ -68,85 +68,83 @@ class WordLetter extends React.Component {
   }
 }
 
-class HangManPart extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      this.props.renderPart ? this.props.part : null
-    )
-  }
-}
-
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.word = this.pickWord(); //assign to random word, preferably all caps.
+    this.state ={
+      partIncrementer : 0,
+    };
+    this.partStates = [];
+    this.wordLetters = [];
+    this.lettersToPick = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+    this.letterInstances = [];
+    this.hangManParts = [];
+
+    for (var i = 0; i < this.lettersToPick.length; i++ ){
+      this.letterInstances.push(<Letter key = {i} letter={this.lettersToPick[i]} />);
+    }
+
+    for (var j = 0; j < this.word.length; j++) {
+      this.wordLetters.push(<WordLetter key={j} letter={this.word.charAt(j)} />);
+    }
+
+
+    this.hangManParts.push(<Line angle="90" x="0" y="-20" width="200" height="20" canvasWidth="20" canvasHeight="200" />);
+    this.hangManParts.push(<Line angle="0" x="0" y="0" width="100" height="20" canvasWidth="100" canvasHeight="20" />);
+    this.hangManParts.push(<Line angle="0" x="0" y="0" width="200" height="20" canvasWidth="200" canvasHeight="20" />);
+    this.hangManParts.push(<Line angle="90" x="0" y="-156" width="30" height="12" canvasWidth="200" canvasHeight="30" />);
+    this.hangManParts.push(<Circle x="150" y="25" radius="22" startAngle="0" canvasWidth="200" canvasHeight="50" />);
+    this.hangManParts.push(<Line angle="300" x="31" y="110" width="30" height="15" canvasWidth="140" canvasHeight="35" />);
+    this.hangManParts.push(<Line angle="90" x="0" y="-20" width="30" height="20" canvasWidth="20" canvasHeight="35" />);
+    this.hangManParts.push(<Line angle="55" x="10" y="-10" width="30" height="15" canvasWidth="50" canvasHeight="35" />);
+    this.hangManParts.push(<Line angle="120" x="-70" y="-130" width="50" height="10" canvasWidth="150" canvasHeight="70" />);
+    this.hangManParts.push(<Line angle="60" x="5" y="-10" width="50" height="10" canvasWidth="50" canvasHeight="70" />);
   }
 
   pickWord() {
     return "alphabet";
   }
 
+  testFunc(){
+    //this.setState({renderOne: this.hangManParts[this.state.partIncrementer]});
+    this.partStates[this.state.partIncrementer] = this.hangManParts[this.state.partIncrementer];
+    this.setState({partIncrementer: this.state.partIncrementer + 1})
+  }
+
   render() {
-
-    const wordLetters = [];
-    const lettersToPick = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-    const letterInstances = [];
-    const hangManParts = [];
-
-    for (var i = 0; i < lettersToPick.length; i++ ){
-      letterInstances.push(<Letter key = {i} letter={lettersToPick[i]} />);
-    }
-
-    for (var j = 0; j < this.word.length; j++) {
-      wordLetters.push(<WordLetter key={j} letter={this.word.charAt(j)} />);
-      //Add code here to do the translation
-    }
-
-    hangManParts.push(<HangManPart part={<Line angle="0" x="0" y="0" width="100" height="20" canvasWidth="100" canvasHeight="20" />} />);
-    hangManParts.push(<HangManPart part={<Line angle="90" x="0" y="-20" width="200" height="20" canvasWidth="20" canvasHeight="200" />} />);
-    hangManParts.push(<HangManPart part={<Line angle="0" x="0" y="0" width="200" height="20" canvasWidth="200" canvasHeight="20" />} />);
-    hangManParts.push(<HangManPart part={<Line angle="90" x="0" y="-156" width="30" height="12" canvasWidth="200" canvasHeight="30" />} />);
-    hangManParts.push(<HangManPart part={<Circle x="150" y="25" radius="22" startAngle="0" canvasWidth="200" canvasHeight="50" />} />);
-    hangManParts.push(<HangManPart part={<Line angle="300" x="31" y="110" width="30" height="15" canvasWidth="140" canvasHeight="35" />} />);
-    hangManParts.push(<HangManPart part={<Line angle="90" x="0" y="-20" width="30" height="20" canvasWidth="20" canvasHeight="35" />} />);
-    hangManParts.push(<HangManPart part={<Line angle="55" x="10" y="-10" width="30" height="15" canvasWidth="50" canvasHeight="35" />} />);
-    hangManParts.push(<HangManPart part={<Line angle="120" x="-70" y="-130" width="50" height="10" canvasWidth="150" canvasHeight="70" />} />);
-    hangManParts.push(<HangManPart part={<Line angle="60" x="5" y="-10" width="50" height="10" canvasWidth="50" canvasHeight="70" />} />);
-
-
     return (
       <div id="app">
         <div id="word">
-          {wordLetters}
+          {this.wordLetters}
         </div>
         <div id="letters">
-          {letterInstances}
+          {this.letterInstances}
         </div>
         <div id="hangman">
-          {hangManParts[2]}
+          {this.partStates[2]}
           <div>
-            {hangManParts[1]}
+          {this.partStates[0]}
             <div className="hangmanPart">
-              <div>{hangManParts[3]}</div>
-              <div>{hangManParts[4]}</div>
+              <div>{this.partStates[3]}</div>
+              <div>{this.partStates[4]}</div>
               <div >
-                <div className="hangmanPart">{hangManParts[5]}</div>
-                <div className="hangmanPart">{hangManParts[6]}</div>
-                <div className="hangmanPart">{hangManParts[7]}</div>
+                <div className="hangmanPart">{this.partStates[5]}</div>
+                <div className="hangmanPart">{this.partStates[6]}</div>
+                <div className="hangmanPart">{this.partStates[7]}</div>
               </div>
               <div>
-                <div className="hangmanPart">{hangManParts[8]}</div>
-                <div className="hangmanPart">{hangManParts[9]}</div>
+                <div className="hangmanPart">{this.partStates[8]}</div>
+                <div className="hangmanPart">{this.partStates[9]}</div>
               </div>
             </div>
 
           </div>
-          {hangManParts[0]}
+          {this.partStates[1]}
         </div>
+        <button onClick={() => this.testFunc()}>
+          onclick
+        </button>
       </div>
     );
   }
