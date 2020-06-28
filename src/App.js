@@ -48,7 +48,7 @@ class WordLetter extends React.Component {
   render() {
     return (
       <div className="wordL">
-        <div className="slot">{this.props.shouldShowLetter ? this.props.letter : null}</div>
+        <div className="slot">{this.props.letter}</div>
         <Line angle="0" x="0" y="0" width="70" height="5" canvasWidth="70" canvasHeight="10"></Line>
       </div>
     )
@@ -73,18 +73,10 @@ class App extends React.Component {
     this.shouldShowParts = [];
 
     this.word = this.pickWord(); //assign to random word, preferably all caps.
-    this.wordLetters = [];
+    this.l = "B";
 
     this.lettersToPick = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-    this.letterInstances = [];
 
-    this.lettersToPick.forEach(function (letterToPick) {
-      this.letterInstances.push(<div className="displayLetter" onClick={() => this.showHangManPart(letterToPick)}><Letter letter={letterToPick} /></div>);
-    }, this);
-
-    this.word.split('').forEach(function(wordLetter){
-      this.wordLetters.push(<WordLetter shouldShowLetter={true} letter={wordLetter} />);
-    }, this);
   }
 
   pickWord() {
@@ -93,7 +85,10 @@ class App extends React.Component {
 
   showHangManPart(letterChosen) {
     //do check if the letter is in the word.
-
+    if (letterChosen === this.l) {
+      console.log("Guessed correctly");
+      this.l = null;
+    }
 
     if (this.state.partIncrementer < this.maxParts) {
       this.setState({ partIncrementer: this.state.partIncrementer + 1 });
@@ -110,10 +105,14 @@ class App extends React.Component {
     return (
       <div id="app">
         <div id="word">
-          {this.wordLetters}
+          {this.word.split('').map(wordLetter => {
+            return <WordLetter letter={this.l} />
+          })}
         </div>
         <div id="letters">
-          {this.letterInstances}
+          {this.lettersToPick.map(letterToPick => {
+            return <div className="displayLetter" onClick={() => this.showHangManPart(letterToPick)}><Letter letter={letterToPick} /></div>
+          })}
         </div>
         <div id="hangman">
           <div id="part2"><HangManPart showPart={this.shouldShowParts[2]} part={<Line angle="0" x="0" y="0" width="200" height="20" canvasWidth="200" canvasHeight="20" />} /></div>
