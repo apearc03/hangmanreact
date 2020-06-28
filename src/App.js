@@ -68,27 +68,33 @@ class App extends React.Component {
     super(props);
     this.maxParts = 10;
     this.state = {
-      partIncrementer: 0,
+      partIncrementer: 0
     };
     this.shouldShowParts = [];
-
     this.word = this.pickWord(); //assign to random word, preferably all caps.
-    this.l = "B";
+    this.l = null;
 
     this.lettersToPick = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
   }
 
   pickWord() {
-    return "alphabet";
+    return "ALPHABET";
   }
 
   showHangManPart(letterChosen) {
     //do check if the letter is in the word.
-    if (letterChosen === this.l) {
-      console.log("Guessed correctly");
-      this.l = null;
-    }
+
+    this.word.split('').forEach(
+      (letter) => {
+        if(letterChosen === letter){
+          console.log("Correct letter")
+          this.l = letterChosen;
+        }
+      }
+    )
+
+
 
     if (this.state.partIncrementer < this.maxParts) {
       this.setState({ partIncrementer: this.state.partIncrementer + 1 });
@@ -106,7 +112,7 @@ class App extends React.Component {
       <div id="app">
         <div id="word">
           {this.word.split('').map(wordLetter => {
-            return <WordLetter letter={this.l} />
+            return <WordLetter letter={this.l} /> //need to keep track of index somehow then make letter appear.
           })}
         </div>
         <div id="letters">
