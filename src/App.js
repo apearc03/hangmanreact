@@ -38,76 +38,72 @@ class Circle extends React.Component {
 class Letter extends React.Component {
   render() {
     return (
-      <div className="displayLetter">{this.props.letter}</div>
+      this.props.letter
     )
-  }
-
-  letterGuessed() {
-
   }
 }
 
 class WordLetter extends React.Component {
-  constructor(props) {
-    super(props);
-    this.shouldShowLetter = false;
-  }
 
   render() {
     return (
       <div className="wordL">
-        <div className="slot">{this.shouldShowLetter ? this.props.letter : null}</div>
+        <div className="slot">{this.props.shouldShowLetter ? this.props.letter : null}</div>
         <Line angle="0" x="0" y="0" width="70" height="5" canvasWidth="70" canvasHeight="10"></Line>
       </div>
     )
-  }
-
-  showLetter() {
-    this.shouldShowLetter = true;
   }
 }
 
 class HangManPart extends React.Component {
   render() {
     return (
-        this.props.showPart ? this.props.part : null
+      this.props.showPart ? this.props.part : null
     )
   }
 }
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.maxParts = 10; 
-    this.state ={
-      partIncrementer : 0,
+    this.maxParts = 10;
+    this.state = {
+      partIncrementer: 0,
     };
-    this.word = this.pickWord(); //assign to random word, preferably all caps.
     this.shouldShowParts = [];
+
+    this.word = this.pickWord(); //assign to random word, preferably all caps.
     this.wordLetters = [];
+
     this.lettersToPick = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
     this.letterInstances = [];
 
-    for (var i = 0; i < this.lettersToPick.length; i++ ){
-      this.letterInstances.push(<Letter key = {i} letter={this.lettersToPick[i]} />);
-    }
+    this.lettersToPick.forEach(function (letterToPick) {
+      this.letterInstances.push(<div className="displayLetter" onClick={() => this.showHangManPart(letterToPick)}><Letter letter={letterToPick} /></div>);
+    }, this);
 
-    for (var j = 0; j < this.word.length; j++) {
-      this.wordLetters.push(<WordLetter key={j} letter={this.word.charAt(j)} />);
-    }
+    this.word.split('').forEach(function(wordLetter){
+      this.wordLetters.push(<WordLetter shouldShowLetter={true} letter={wordLetter} />);
+    }, this);
   }
 
   pickWord() {
     return "alphabet";
   }
 
-  showHangManPart(){
-    if(this.state.partIncrementer < this.maxParts){
-      console.log("incremented");
-      this.setState({partIncrementer: this.state.partIncrementer + 1});
+  showHangManPart(letterChosen) {
+    //do check if the letter is in the word.
+
+
+    if (this.state.partIncrementer < this.maxParts) {
+      this.setState({ partIncrementer: this.state.partIncrementer + 1 });
       this.shouldShowParts[this.state.partIncrementer] = true;
+      console.log(letterChosen);
     }
+  }
+
+  logOut() {
+    console.log("output");
   }
 
   render() {
@@ -120,29 +116,26 @@ class App extends React.Component {
           {this.letterInstances}
         </div>
         <div id="hangman">
-          <div id = "part2"><HangManPart showPart = {this.shouldShowParts[2]} part={<Line angle="0" x="0" y="0" width="200" height="20" canvasWidth="200" canvasHeight="20" />}/></div>
+          <div id="part2"><HangManPart showPart={this.shouldShowParts[2]} part={<Line angle="0" x="0" y="0" width="200" height="20" canvasWidth="200" canvasHeight="20" />} /></div>
           <div>
-          <HangManPart showPart = {this.shouldShowParts[1]} part={<Line angle="90" x="0" y="-20" width="200" height="20" canvasWidth="20" canvasHeight="200" />}/>
+            <HangManPart showPart={this.shouldShowParts[1]} part={<Line angle="90" x="0" y="-20" width="200" height="20" canvasWidth="20" canvasHeight="200" />} />
             <div className="hangmanPart">
-              <div id = "part3"><HangManPart showPart = {this.shouldShowParts[3]} part={<Line angle="90" x="0" y="-156" width="30" height="12" canvasWidth="200" canvasHeight="30" />}/></div>
-              <div id = "part4"><HangManPart showPart = {this.shouldShowParts[4]} part={<Circle x="150" y="25" radius="22" startAngle="0" canvasWidth="200" canvasHeight="50" />}/></div>
+              <div id="part3"><HangManPart showPart={this.shouldShowParts[3]} part={<Line angle="90" x="0" y="-156" width="30" height="12" canvasWidth="200" canvasHeight="30" />} /></div>
+              <div id="part4"><HangManPart showPart={this.shouldShowParts[4]} part={<Circle x="150" y="25" radius="22" startAngle="0" canvasWidth="200" canvasHeight="50" />} /></div>
               <div >
-                <div id = "part5" className="hangmanPart"><HangManPart showPart = {this.shouldShowParts[5]} part={<Line angle="300" x="31" y="110" width="30" height="15" canvasWidth="140" canvasHeight="35" />}/></div>
-                <div id = "part6" className="hangmanPart"><HangManPart showPart = {this.shouldShowParts[6]} part={<Line angle="90" x="0" y="-20" width="30" height="20" canvasWidth="20" canvasHeight="35" />}/></div>
-                <div id = "part7" className="hangmanPart"><HangManPart showPart = {this.shouldShowParts[7]} part={<Line angle="55" x="10" y="-10" width="30" height="15" canvasWidth="50" canvasHeight="35" />}/></div>
+                <div id="part5" className="hangmanPart"><HangManPart showPart={this.shouldShowParts[5]} part={<Line angle="300" x="31" y="110" width="30" height="15" canvasWidth="140" canvasHeight="35" />} /></div>
+                <div id="part6" className="hangmanPart"><HangManPart showPart={this.shouldShowParts[6]} part={<Line angle="90" x="0" y="-20" width="30" height="20" canvasWidth="20" canvasHeight="35" />} /></div>
+                <div id="part7" className="hangmanPart"><HangManPart showPart={this.shouldShowParts[7]} part={<Line angle="55" x="10" y="-10" width="30" height="15" canvasWidth="50" canvasHeight="35" />} /></div>
               </div>
               <div>
-                <div id = "part8" className="hangmanPart"><HangManPart showPart = {this.shouldShowParts[8]} part={<Line angle="120" x="-70" y="-130" width="50" height="10" canvasWidth="150" canvasHeight="70" />}/></div>
-                <div id = "part9" className="hangmanPart"><HangManPart showPart = {this.shouldShowParts[9]} part={<Line angle="60" x="5" y="-10" width="50" height="10" canvasWidth="50" canvasHeight="70" />}/></div>
+                <div id="part8" className="hangmanPart"><HangManPart showPart={this.shouldShowParts[8]} part={<Line angle="120" x="-70" y="-130" width="50" height="10" canvasWidth="150" canvasHeight="70" />} /></div>
+                <div id="part9" className="hangmanPart"><HangManPart showPart={this.shouldShowParts[9]} part={<Line angle="60" x="5" y="-10" width="50" height="10" canvasWidth="50" canvasHeight="70" />} /></div>
               </div>
             </div>
 
           </div>
-          <HangManPart showPart = {this.shouldShowParts[0]} part={<Line angle="0" x="0" y="0" width="100" height="20" canvasWidth="100" canvasHeight="20" />}/>
+          <HangManPart showPart={this.shouldShowParts[0]} part={<Line angle="0" x="0" y="0" width="100" height="20" canvasWidth="100" canvasHeight="20" />} />
         </div>
-        <button onClick={() => this.showHangManPart()}>
-          onclick
-        </button>
       </div>
     );
   }
