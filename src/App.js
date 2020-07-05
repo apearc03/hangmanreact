@@ -48,7 +48,7 @@ class WordLetter extends React.Component {
   render() {
     return (
       <div className="wordL">
-        <div className="slot">{this.props.letter}</div>
+        <div className="slot">{this.props.renderLetter ? this.props.letter : null}</div>
         <Line angle="0" x="0" y="0" width="70" height="5" canvasWidth="70" canvasHeight="10"></Line>
       </div>
     )
@@ -67,12 +67,10 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.maxParts = 10;
-    this.state = {
-      partIncrementer: 0
-    };
+    this.partIncrementer = 0
     this.shouldShowParts = [];
     this.word = this.pickWord(); //assign to random word, preferably all caps.
-    this.l = null;
+    this.shouldRenderWordLetters = [];
 
     this.lettersToPick = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
@@ -82,42 +80,51 @@ class App extends React.Component {
     return "ALPHABET";
   }
 
-  showHangManPart(letterChosen) {
-    //do check if the letter is in the word.
+  makeGuess(letterChosen) {
+    let incorrectGuess = true;
+    let hasWon = true;
 
     this.word.split('').forEach(
-      (letter) => {
+      (letter, index) => {
         if(letterChosen === letter){
-          console.log("Correct letter")
-          this.l = letterChosen;
+          this.shouldRenderWordLetters[index] = true;
+          incorrectGuess = false;
+        }
+        if(this.shouldRenderWordLetters[index] !== true){
+          hasWon = false;
         }
       }
     )
-
-
-
-    if (this.state.partIncrementer < this.maxParts) {
-      this.setState({ partIncrementer: this.state.partIncrementer + 1 });
-      this.shouldShowParts[this.state.partIncrementer] = true;
-      console.log(letterChosen);
+    
+    if(incorrectGuess){
+      this.shouldShowParts[this.partIncrementer] = true;
+      this.partIncrementer++;
     }
-  }
+    
+    this.forceUpdate();
 
-  logOut() {
-    console.log("output");
+    if (this.partIncrementer >= this.maxParts) {
+      console.log("Game over");
+    }
+
+    if(hasWon){
+      console.log("Won");
+    }
+
   }
 
   render() {
     return (
       <div id="app">
         <div id="word">
-          {this.word.split('').map(wordLetter => {
-            return <WordLetter letter={this.l} /> //need to keep track of index somehow then make letter appear.
-          })}
+          {this.word.split('').map((wordLetter, index) => {
+            return <WordLetter letter={wordLetter} renderLetter={this.shouldRenderWordLetters[index]} />
+          })
+          }
         </div>
         <div id="letters">
           {this.lettersToPick.map(letterToPick => {
-            return <div className="displayLetter" onClick={() => this.showHangManPart(letterToPick)}><Letter letter={letterToPick} /></div>
+            return <div className="displayLetter" onClick={() => this.makeGuess(letterToPick)}><Letter letter={letterToPick} /></div>
           })}
         </div>
         <div id="hangman">
