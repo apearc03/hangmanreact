@@ -71,6 +71,7 @@ class App extends React.Component {
     this.shouldShowParts = [];
     this.word = this.pickWord(); //assign to random word, preferably all caps.
     this.shouldRenderWordLetters = [];
+    this.gameOver = false;
 
     this.lettersToPick = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
@@ -80,7 +81,13 @@ class App extends React.Component {
     return "ALPHABET";
   }
 
-  makeGuess(letterChosen) {
+  //Need to disable letters
+  makeGuess(letterChosen, letterIndex) {
+    if(letterChosen === null || this.gameOver){
+      return;
+    }
+    
+    this.lettersToPick[letterIndex] = null; 
     let incorrectGuess = true;
     let hasWon = true;
 
@@ -95,7 +102,7 @@ class App extends React.Component {
         }
       }
     )
-    
+
     if(incorrectGuess){
       this.shouldShowParts[this.partIncrementer] = true;
       this.partIncrementer++;
@@ -104,7 +111,7 @@ class App extends React.Component {
     this.forceUpdate();
 
     if (this.partIncrementer >= this.maxParts) {
-      console.log("Game over");
+      this.gameOver = true;
     }
 
     if(hasWon){
@@ -123,8 +130,8 @@ class App extends React.Component {
           }
         </div>
         <div id="letters">
-          {this.lettersToPick.map(letterToPick => {
-            return <div className="displayLetter" onClick={() => this.makeGuess(letterToPick)}><Letter letter={letterToPick} /></div>
+          {this.lettersToPick.map((letterToPick, index) => {
+            return <div className="displayLetter" onClick={() => this.makeGuess(letterToPick, index)}><Letter letter={this.lettersToPick[index]} /></div>
           })}
         </div>
         <div id="hangman">

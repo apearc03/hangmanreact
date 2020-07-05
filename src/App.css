@@ -8,9 +8,10 @@
 }
 
 .displayLetter{
-  padding: 5px;
   font-size: 30px;
   display: inline-block;
+  width: 32px;
+  text-align: center;
 }
 
 .displayLetter:hover{
@@ -32,7 +33,7 @@
 }
 
 #letters{
-  padding-bottom: 50px;
+  padding-bottom: 20px;
 }
 
 #hangman {
