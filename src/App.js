@@ -112,10 +112,13 @@ class App extends React.Component {
 
     if (this.partIncrementer >= this.maxParts) {
       this.gameOver = true;
+      //games been lost
     }
 
     if(hasWon){
+      this.gameOver = true;
       console.log("Won");
+      //games been won
     }
 
   }
