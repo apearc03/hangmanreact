@@ -75,7 +75,7 @@ class GameResult extends React.Component {
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.maxParts = 10;
+    this.maxParts = 8;
     this.reset();
 
   }
@@ -93,6 +93,7 @@ class App extends React.Component {
     this.gameOver = false;
     this.resultMessage = "";
     this.lettersToPick = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+    this.forceUpdate();
   }
 
 
@@ -139,7 +140,7 @@ class App extends React.Component {
     return (
       <div id="app">
         <div id="resultContainer">
-        {this.gameOver ? <div><GameResult resultMessage={this.resultMessage}/><button>Play again</button></div> : null}
+        {this.gameOver ? <div><GameResult resultMessage={this.resultMessage}/><button onClick={() => this.reset()}>Play again</button></div> : null}
       </div>
         <div id="word">
           {this.word.split('').map((wordLetter, index) => {
@@ -153,20 +154,20 @@ class App extends React.Component {
           })}
         </div>
         <div id="hangman">
-          <div id="part2"><HangManPart showPart={this.shouldShowParts[2]} part={<Line angle="0" x="0" y="0" width="200" height="20" canvasWidth="200" canvasHeight="20" />} /></div>
+          <div id="part2"><HangManPart showPart={this.shouldShowParts[1]} part={<Line angle="0" x="0" y="0" width="200" height="20" canvasWidth="200" canvasHeight="20" />} /></div>
           <div>
-            <HangManPart showPart={this.shouldShowParts[1]} part={<Line angle="90" x="0" y="-20" width="200" height="20" canvasWidth="20" canvasHeight="200" />} />
+            <HangManPart showPart={this.shouldShowParts[0]} part={<Line angle="90" x="0" y="-20" width="200" height="20" canvasWidth="20" canvasHeight="200" />} />
             <div className="hangmanPart">
-              <div id="part3"><HangManPart showPart={this.shouldShowParts[3]} part={<Line angle="90" x="0" y="-156" width="30" height="12" canvasWidth="200" canvasHeight="30" />} /></div>
-              <div id="part4"><HangManPart showPart={this.shouldShowParts[4]} part={<Circle x="150" y="25" radius="22" startAngle="0" canvasWidth="200" canvasHeight="50" />} /></div>
+              <div id="part3"><HangManPart showPart={this.shouldShowParts[2]} part={<Line angle="90" x="0" y="-156" width="30" height="12" canvasWidth="200" canvasHeight="30" />} /></div>
+              <div id="part4"><HangManPart showPart={this.shouldShowParts[2]} part={<Circle x="150" y="25" radius="22" startAngle="0" canvasWidth="200" canvasHeight="50" />} /></div>
               <div >
-                <div id="part5" className="hangmanPart"><HangManPart showPart={this.shouldShowParts[5]} part={<Line angle="300" x="31" y="110" width="30" height="15" canvasWidth="140" canvasHeight="35" />} /></div>
-                <div id="part6" className="hangmanPart"><HangManPart showPart={this.shouldShowParts[6]} part={<Line angle="90" x="0" y="-20" width="30" height="20" canvasWidth="20" canvasHeight="35" />} /></div>
-                <div id="part7" className="hangmanPart"><HangManPart showPart={this.shouldShowParts[7]} part={<Line angle="55" x="10" y="-10" width="30" height="15" canvasWidth="50" canvasHeight="35" />} /></div>
+                <div id="part5" className="hangmanPart"><HangManPart showPart={this.shouldShowParts[3]} part={<Line angle="300" x="31" y="110" width="30" height="15" canvasWidth="140" canvasHeight="35" />} /></div>
+                <div id="part6" className="hangmanPart"><HangManPart showPart={this.shouldShowParts[4]} part={<Line angle="90" x="0" y="-20" width="30" height="20" canvasWidth="20" canvasHeight="35" />} /></div>
+                <div id="part7" className="hangmanPart"><HangManPart showPart={this.shouldShowParts[5]} part={<Line angle="55" x="10" y="-10" width="30" height="15" canvasWidth="50" canvasHeight="35" />} /></div>
               </div>
               <div>
-                <div id="part8" className="hangmanPart"><HangManPart showPart={this.shouldShowParts[8]} part={<Line angle="120" x="-70" y="-130" width="50" height="10" canvasWidth="150" canvasHeight="70" />} /></div>
-                <div id="part9" className="hangmanPart"><HangManPart showPart={this.shouldShowParts[9]} part={<Line angle="60" x="5" y="-10" width="50" height="10" canvasWidth="50" canvasHeight="70" />} /></div>
+                <div id="part8" className="hangmanPart"><HangManPart showPart={this.shouldShowParts[6]} part={<Line angle="120" x="-70" y="-130" width="50" height="10" canvasWidth="150" canvasHeight="70" />} /></div>
+                <div id="part9" className="hangmanPart"><HangManPart showPart={this.shouldShowParts[7]} part={<Line angle="60" x="5" y="-10" width="50" height="10" canvasWidth="50" canvasHeight="70" />} /></div>
               </div>
             </div>
 
