@@ -64,17 +64,19 @@ class HangManPart extends React.Component {
   }
 }
 
+class GameResult extends React.Component {
+  render() {
+    return (
+      <div id = "resultMessage">{this.props.resultMessage}</div>
+    )
+  }
+}
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.maxParts = 10;
-    this.partIncrementer = 0
-    this.shouldShowParts = [];
-    this.word = this.pickWord(); //assign to random word, preferably all caps.
-    this.shouldRenderWordLetters = [];
-    this.gameOver = false;
-
-    this.lettersToPick = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+    this.reset();
 
   }
 
@@ -83,51 +85,62 @@ class App extends React.Component {
     return s.toUpperCase();
   }
 
+  reset() {
+    this.partIncrementer = 0;
+    this.shouldShowParts = [];
+    this.word = this.pickWord();
+    this.shouldRenderWordLetters = [];
+    this.gameOver = false;
+    this.resultMessage = "";
+    this.lettersToPick = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+  }
+
+
   //Need to disable letters
   makeGuess(letterChosen, letterIndex) {
-    if(letterChosen === null || this.gameOver){
+    if (letterChosen === null || this.gameOver) {
       return;
     }
-    
-    this.lettersToPick[letterIndex] = null; 
+
+    this.lettersToPick[letterIndex] = null;
     let incorrectGuess = true;
     let hasWon = true;
 
     this.word.split('').forEach(
       (letter, index) => {
-        if(letterChosen === letter){
+        if (letterChosen === letter) {
           this.shouldRenderWordLetters[index] = true;
           incorrectGuess = false;
         }
-        if(this.shouldRenderWordLetters[index] !== true){
+        if (this.shouldRenderWordLetters[index] !== true) {
           hasWon = false;
         }
       }
     )
 
-    if(incorrectGuess){
+    if (incorrectGuess) {
       this.shouldShowParts[this.partIncrementer] = true;
       this.partIncrementer++;
     }
-    
-    this.forceUpdate();
 
     if (this.partIncrementer >= this.maxParts) {
       this.gameOver = true;
-      //games been lost
+      this.resultMessage = "You have been hanged!"
     }
 
-    if(hasWon){
+    if (hasWon) {
       this.gameOver = true;
-      console.log("Won");
-      //games been won
+      this.resultMessage = "You're free to go!"
     }
-
+    this.forceUpdate();
   }
 
   render() {
     return (
       <div id="app">
+        <div id="resultContainer">
+        {this.gameOver ? <div><GameResult resultMessage={this.resultMessage}/><button>Play again</button></div> : null}
+      </div>
         <div id="word">
           {this.word.split('').map((wordLetter, index) => {
             return <WordLetter letter={wordLetter} renderLetter={this.shouldRenderWordLetters[index]} />

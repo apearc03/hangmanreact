@@ -83,3 +83,12 @@
 #part9{
   height: 74px;
 }
+
+#resultMessage{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#resultContainer{
+  height:67px;
+}
