@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import { words } from './10letters.js'
 
 class Line extends React.Component {
   componentDidMount() {
@@ -78,7 +79,8 @@ class App extends React.Component {
   }
 
   pickWord() {
-    return "ALPHABET";
+    let s = words[Math.floor(Math.random() * words.length)];
+    return s.toUpperCase();
   }
 
   //Need to disable letters
