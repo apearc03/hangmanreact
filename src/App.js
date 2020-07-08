@@ -89,6 +89,7 @@ class App extends React.Component {
     this.partIncrementer = 0;
     this.shouldShowParts = [];
     this.word = this.pickWord();
+    this.wordSplit = this.word.split('');
     this.shouldRenderWordLetters = [];
     this.gameOver = false;
     this.resultMessage = "";
@@ -107,7 +108,7 @@ class App extends React.Component {
     let incorrectGuess = true;
     let hasWon = true;
 
-    this.word.split('').forEach(
+    this.wordSplit.forEach(
       (letter, index) => {
         if (letterChosen === letter) {
           this.shouldRenderWordLetters[index] = true;
@@ -127,7 +128,7 @@ class App extends React.Component {
     if (this.partIncrementer >= this.maxParts) {
       this.gameOver = true;
       this.resultMessage = "You have been hanged!"
-      this.word.split('').forEach(
+      this.wordSplit.forEach(
         (letter, index) => {
           this.shouldRenderWordLetters[index] = true;
         }
@@ -148,7 +149,7 @@ class App extends React.Component {
         {this.gameOver ? <div><GameResult resultMessage={this.resultMessage}/><button onClick={() => this.reset()}>Play again</button></div> : null}
       </div>
         <div id="word">
-          {this.word.split('').map((wordLetter, index) => {
+          {this.wordSplit.map((wordLetter, index) => {
             return <WordLetter letter={wordLetter} renderLetter={this.shouldRenderWordLetters[index]} />
           })
           }
