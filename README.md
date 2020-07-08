@@ -6,6 +6,8 @@ Try it online here:
 
 https://hangmanreact.herokuapp.com/
 
+(Heroku apps take a few seconds to start up if dormant)
+
 ## Dependencies
 
 Node >= 8.10
