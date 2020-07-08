@@ -1,5 +1,11 @@
 Hangman built with React.js
 
+## Try it
+
+Try it online here:
+
+https://hangmanreact.herokuapp.com/
+
 ## Dependencies
 
 Node >= 8.10
