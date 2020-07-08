@@ -127,6 +127,11 @@ class App extends React.Component {
     if (this.partIncrementer >= this.maxParts) {
       this.gameOver = true;
       this.resultMessage = "You have been hanged!"
+      this.word.split('').forEach(
+        (letter, index) => {
+          this.shouldRenderWordLetters[index] = true;
+        }
+      )
     }
 
     if (hasWon) {
